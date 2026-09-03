@@ -8,48 +8,46 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-sm">
-      {/* Top bar */}
-      <div className="hidden md:flex items-center justify-between bg-slate-900 text-slate-200 text-sm px-6 py-1.5">
-        <div className="flex items-center gap-4">
+    <header className="site-header">
+      <div className="header-inner">
+        <div className="header-top">
           <a
             href={`https://wa.me/${siteInfo.phoneDigits}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-emerald-400 transition-colors"
+            className="contact-link"
           >
-            WhatsApp: {siteInfo.phone}
+            ◉ &nbsp;{siteInfo.phone}
           </a>
-          <a href={`tel:+${siteInfo.phoneDigits}`} className="hover:text-emerald-400 transition-colors">
-            Ligar: {siteInfo.phone}
+          <a href={`tel:+${siteInfo.phoneDigits}`} className="contact-link">
+            ☎ &nbsp;{siteInfo.phone}
           </a>
+          <div className="socials">
+          <a href={siteInfo.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="social-link">
+            ◎
+          </a>
+          <a href={siteInfo.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="social-link">
+            f
+          </a>
+          </div>
         </div>
-        <div className="flex items-center gap-3">
-          <a href={siteInfo.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-emerald-400">
-            Instagram
-          </a>
-          <a href={siteInfo.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-emerald-400">
-            Facebook
-          </a>
-        </div>
-      </div>
 
-      {/* Main bar */}
-      <div className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
-        <Link href="/" className="text-xl font-bold text-emerald-700">
-          Technolife<span className="text-slate-800"> Informática</span>
+        <div className="header-main">
+        <Link href="/" className="brand">
+          <img src="/technolife-logo.png" alt="Technolife Informática" onError={(event) => { event.currentTarget.style.display = "none"; const fallback = event.currentTarget.nextElementSibling; if (fallback instanceof HTMLElement) fallback.style.display = "block"; }} />
+          <span className="brand-fallback">Technolife<span>Informática</span></span>
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-6 text-sm font-medium">
+        <nav className="main-nav">
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="text-slate-700 hover:text-emerald-700 transition-colors">
+            <Link key={link.href} href={link.href} className={`nav-link${link.href === "/" ? " active" : ""}`}>
               {link.label}
             </Link>
           ))}
         </nav>
 
         <button
-          className="lg:hidden text-slate-700"
+          className="menu-button"
           onClick={() => setOpen((v) => !v)}
           aria-label="Abrir menu"
         >
@@ -61,26 +59,26 @@ export default function Header() {
             )}
           </svg>
         </button>
-      </div>
+        </div>
 
-      {/* Mobile menu */}
       {open && (
-        <nav className="lg:hidden border-t border-slate-100 px-6 py-4 flex flex-col gap-3 text-sm font-medium bg-white">
+        <nav className="main-nav" style={{ display: "flex", flexDirection: "column", alignItems: "stretch", padding: "15px 0" }}>
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-slate-700 hover:text-emerald-700"
+              className="nav-link"
               onClick={() => setOpen(false)}
             >
               {link.label}
             </Link>
           ))}
-          <a href={`https://wa.me/${siteInfo.phoneDigits}`} className="text-emerald-700 font-semibold">
+          <a href={`https://wa.me/${siteInfo.phoneDigits}`} className="contact-link">
             WhatsApp: {siteInfo.phone}
           </a>
         </nav>
       )}
+      </div>
     </header>
   );
 }

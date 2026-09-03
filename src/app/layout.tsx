@@ -30,6 +30,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <a className="floating-whatsapp" href="https://wa.me/5512988200317" target="_blank" rel="noopener noreferrer" aria-label="Falar pelo WhatsApp">
+          ◔
+        </a>
       </body>
     </html>
   );
