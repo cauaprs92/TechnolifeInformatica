@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
 
-## Getting Started
+# 💻 Technolife Informática
 
-First, run the development server:
+### Assistência técnica, loja virtual e soluções em tecnologia
+
+<a href="https://technolifeinformatica.vercel.app/">
+  <img src="https://img.shields.io/badge/🌐_ACESSAR_SITE-technolifeinformatica.vercel.app-2563eb?style=for-the-badge&labelColor=0f172a" alt="Acessar site" />
+</a>
+
+<br/><br/>
+
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js)](https://nextjs.org)
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-4-38BDF8?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![Deploy](https://img.shields.io/badge/Deploy-Vercel-000000?style=flat-square&logo=vercel)](https://technolifeinformatica.vercel.app/)
+
+</div>
+
+---
+
+## 🔗 Link de acesso
+
+<div align="center">
+
+### ➡️ **[https://technolifeinformatica.vercel.app/](https://technolifeinformatica.vercel.app/)** ⬅️
+
+</div>
+
+---
+
+## ✨ Sobre o projeto
+
+Site institucional da **Technolife Informática**, desenvolvido com **Next.js** e **Tailwind CSS**, apresentando os serviços de assistência técnica, loja virtual, equipe, clientes e depoimentos.
+
+## 🧩 Páginas
+
+| Rota | Descrição |
+|---|---|
+| `/` | Página inicial com destaque (Hero) e visão geral |
+| `/servicos` | Serviços oferecidos pela Technolife |
+| `/sobre` | Sobre a empresa e a equipe |
+| `/clientes` | Clientes atendidos |
+| `/depoimentos` | Depoimentos de clientes |
+| `/loja-virtual` | Divulgação da loja virtual |
+| `/contato` | Formas de contato |
+
+## 🚀 Rodando localmente
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra [http://localhost:3000](http://localhost:3000) no navegador.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Next.js 16** — framework React (App Router)
+- **React 19**
+- **TypeScript**
+- **Tailwind CSS 4**
+- **Vercel** — deploy e hospedagem
 
-## Learn More
+## 📦 Deploy
 
-To learn more about Next.js, take a look at the following resources:
+O projeto está publicado na Vercel:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<div align="center">
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**[🌐 technolifeinformatica.vercel.app](https://technolifeinformatica.vercel.app/)**
 
-## Deploy on Vercel
+</div>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<div align="center">
+<sub>Feito com 💙 pela equipe Technolife Informática</sub>
+</div>
