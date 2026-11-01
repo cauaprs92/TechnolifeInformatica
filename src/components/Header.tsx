@@ -1,84 +1,125 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import { navLinks, siteInfo } from "@/lib/nav";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
+import { navLinks, siteInfo, whatsappLink } from "@/lib/nav";
+import { WhatsAppIcon } from "./icons";
+
+function isActive(pathname: string, href: string) {
+  return href === "/" ? pathname === "/" : pathname.startsWith(href);
+}
 
 export default function Header() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
-  return (
-    <header className="site-header">
-      <div className="header-inner">
-        <div className="header-top">
-          <a
-            href={`https://wa.me/${siteInfo.phoneDigits}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="contact-link"
-          >
-            ◉ &nbsp;{siteInfo.phone}
-          </a>
-          <a href={`tel:+${siteInfo.phoneDigits}`} className="contact-link">
-            ☎ &nbsp;{siteInfo.phone}
-          </a>
-          <div className="socials">
-          <a href={siteInfo.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="social-link">
-            ◎
-          </a>
-          <a href={siteInfo.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="social-link">
-            f
-          </a>
-          </div>
-        </div>
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
 
-        <div className="header-main">
-        <Link href="/" className="brand">
-          <img src="/technolife-logo.png" alt="Technolife Informática" onError={(event) => { event.currentTarget.style.display = "none"; const fallback = event.currentTarget.nextElementSibling; if (fallback instanceof HTMLElement) fallback.style.display = "block"; }} />
-          <span className="brand-fallback">Technolife<span>Informática</span></span>
+  return (
+    <header className="sticky top-0 z-50 border-b border-line/80 bg-white/85 backdrop-blur-xl">
+      <div className="shell flex h-18 items-center justify-between gap-6">
+        <Link href="/" className="shrink-0" aria-label="Technolife Informática, página inicial">
+          <Image
+            src="/technolife-logo.png"
+            alt="Technolife Informática"
+            width={243}
+            height={129}
+            loading="eager"
+            className="h-12 w-auto"
+          />
         </Link>
 
-        <nav className="main-nav">
-          {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} className={`nav-link${link.href === "/" ? " active" : ""}`}>
-              {link.label}
-            </Link>
-          ))}
+        <nav aria-label="Principal" className="hidden lg:block">
+          <ul className="flex items-center gap-1">
+            {navLinks.map((link) => {
+              const active = isActive(pathname, link.href);
+              return (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    aria-current={active ? "page" : undefined}
+                    className={`relative block rounded-full px-3.5 py-2 text-[0.92rem] font-medium transition-colors ${
+                      active ? "text-ink" : "text-body hover:text-ink"
+                    }`}
+                  >
+                    {link.label}
+                    {active && (
+                      <span className="absolute inset-x-3.5 bottom-0.5 h-0.5 rounded-full bg-signal" />
+                    )}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
         </nav>
 
-        <button
-          className="menu-button"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Abrir menu"
-        >
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            {open ? (
-              <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
-            ) : (
-              <path d="M3 6h18M3 12h18M3 18h18" strokeLinecap="round" />
-            )}
-          </svg>
-        </button>
+        <div className="flex items-center gap-2">
+          <a
+            href={whatsappLink()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-primary hidden !px-4 !py-2.5 text-sm sm:inline-flex"
+          >
+            <WhatsAppIcon className="size-4" />
+            Fale conosco
+          </a>
+          <button
+            type="button"
+            className="grid size-11 place-items-center rounded-full text-ink ring-1 ring-line transition hover:bg-paper lg:hidden"
+            onClick={() => setOpen((value) => !value)}
+            aria-expanded={open}
+            aria-controls="menu-mobile"
+            aria-label={open ? "Fechar menu" : "Abrir menu"}
+          >
+            {open ? <X className="size-5" /> : <Menu className="size-5" />}
+          </button>
         </div>
+      </div>
 
       {open && (
-        <nav className="main-nav" style={{ display: "flex", flexDirection: "column", alignItems: "stretch", padding: "15px 0" }}>
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="nav-link"
-              onClick={() => setOpen(false)}
+        <div id="menu-mobile" className="border-t border-line bg-white lg:hidden">
+          <nav aria-label="Menu" className="shell py-5">
+            <ul className="grid">
+              {navLinks.map((link) => {
+                const active = isActive(pathname, link.href);
+                return (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      onClick={() => setOpen(false)}
+                      aria-current={active ? "page" : undefined}
+                      className={`flex items-center justify-between border-b border-line py-3.5 font-display text-2xl font-bold [font-variation-settings:'wdth'_85] ${
+                        active ? "text-signal" : "text-ink"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+            <a
+              href={whatsappLink()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary mt-6 w-full"
             >
-              {link.label}
-            </Link>
-          ))}
-          <a href={`https://wa.me/${siteInfo.phoneDigits}`} className="contact-link">
-            WhatsApp: {siteInfo.phone}
-          </a>
-        </nav>
+              <WhatsAppIcon className="size-5" />
+              WhatsApp {siteInfo.phone}
+            </a>
+          </nav>
+        </div>
       )}
-      </div>
     </header>
   );
 }

@@ -1,19 +1,21 @@
 import Hero from "@/components/Hero";
-import Services from "@/components/Services";
+import ClientMarquee from "@/components/ClientMarquee";
+import ServicePillars from "@/components/ServicePillars";
 import TeamLab from "@/components/TeamLab";
-import Clients from "@/components/Clients";
+import Process from "@/components/Process";
 import Testimonials from "@/components/Testimonials";
-import ShopPromo from "@/components/ShopPromo";
+import CtaBand from "@/components/CtaBand";
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <Services />
+      <ClientMarquee />
+      <ServicePillars />
       <TeamLab />
-      <Clients />
+      <Process />
       <Testimonials />
-      <ShopPromo />
+      <CtaBand />
     </>
   );
 }
