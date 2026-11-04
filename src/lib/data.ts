@@ -5,10 +5,7 @@ import {
   Cpu,
   DatabaseBackup,
   Handshake,
-  HardDrive,
-  Headphones,
   House,
-  Keyboard,
   Laptop,
   Mail,
   MessageCircle,
@@ -167,13 +164,4 @@ export const testimonials = [
     quote:
       "Parceria de confiança para backup e segurança dos nossos servidores. Recomendo a todos.",
   },
-];
-
-export const shopCategories: { title: string; text: string; icon: LucideIcon }[] = [
-  { title: "Computadores e notebooks", text: "Equipamentos para trabalho, estudo e uso em casa.", icon: Laptop },
-  { title: "Periféricos", text: "Teclados, mouses, monitores e webcams.", icon: Keyboard },
-  { title: "Componentes", text: "Memória, processadores, fontes e peças para upgrade.", icon: Cpu },
-  { title: "Redes e Wi-Fi", text: "Roteadores, cabos e acessórios de conectividade.", icon: Router },
-  { title: "Armazenamento", text: "SSDs, HDs externos, pendrives e soluções de backup.", icon: HardDrive },
-  { title: "Acessórios", text: "Fones, carregadores, cabos e adaptadores.", icon: Headphones },
 ];
