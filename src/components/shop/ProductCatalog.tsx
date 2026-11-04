@@ -17,7 +17,10 @@ export default function ProductCatalog() {
 
   const tabs: { id: Filter; title: string; icon: LucideIcon; count: number }[] = [
     { id: "todos", title: "Todos", icon: LayoutGrid, count: products.length },
-    ...shopCategories.map((c) => ({ id: c.id, title: c.title, icon: c.icon, count: countOf(c.id) })),
+    // Só mostra categorias que já têm produto cadastrado
+    ...shopCategories
+      .map((c) => ({ id: c.id, title: c.title, icon: c.icon, count: countOf(c.id) }))
+      .filter((tab) => tab.count > 0),
   ];
 
   return (
@@ -59,7 +62,7 @@ export default function ProductCatalog() {
       </p>
 
       {visible.length > 0 ? (
-        <ul className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {visible.map((product) => (
             <li key={product.id}>
               <ProductCard product={product} />

@@ -15,7 +15,7 @@ import {
 /*
   Dados da Loja Virtual.
   Para cadastrar um produto, adicione um item em `products`.
-  Fotos: coloque o arquivo em /public/images/loja e informe só o nome em `image`.
+  Fotos: coloque o arquivo em /public/images/loja e informe os nomes em `images`.
 */
 
 export type CategoryId =
@@ -39,97 +39,61 @@ export type Product = {
   id: string;
   name: string;
   category: CategoryId;
+  /** Configuração em itens curtos (processador, memória, armazenamento...). */
+  specs?: string[];
   /** Frase curta com o principal benefício (aparece no card, até 2 linhas). */
   description: string;
-  /** Nome do arquivo em /public/images/loja. Sem foto, o card mostra um espaço reservado. */
-  image?: string;
+  /**
+   * Fotos em /public/images/loja (só o nome do arquivo). A primeira aparece no card e a
+   * segunda ao passar o mouse. Sem foto, o card mostra um espaço reservado.
+   */
+  images?: string[];
   /** Preço atual. Sem preço, o card mostra "Consulte o preço". */
   price?: number;
   /** Preço antigo, riscado. O desconto em % é calculado sozinho. */
   oldPrice?: number;
   /** Número de parcelas sem juros. */
   installments?: number;
-  badge?: "Oferta" | "Novo" | "Mais vendido";
+  condition?: "Novo" | "Seminovo";
+  badge?: "Oferta" | "Mais vendido";
   stock?: "disponivel" | "ultimas" | "encomenda";
   /** Produto em destaque no topo da página (use em apenas um). */
   featured?: boolean;
 };
 
-// ATENÇÃO: nomes e valores abaixo são de exemplo. Substitua pelos produtos reais.
 export const products: Product[] = [
   {
-    id: "notebook-i5",
-    name: "Notebook 15,6\" Intel Core i5, 8 GB, SSD 256 GB",
+    id: "notebook-hp-probook-i3",
+    name: "Notebook HP ProBook",
     category: "computadores",
-    description: "Pronto para trabalho e estudo, entregue formatado e configurado.",
-    price: 3299,
-    oldPrice: 3699,
-    installments: 10,
-    badge: "Oferta",
-    stock: "ultimas",
+    specs: ["Intel Core i3 8ª geração", "8 GB de RAM", "128 GB de armazenamento"],
+    description: "Notebook da linha corporativa da HP, ideal para trabalho e estudo.",
+    images: ["hp-probook-1.jpg", "hp-probook-2.jpg"],
+    price: 2290,
+    condition: "Seminovo",
+    stock: "disponivel",
     featured: true,
   },
   {
-    id: "desktop-escritorio",
-    name: "Computador para escritório Intel Core i3, 8 GB, SSD 240 GB",
+    id: "mini-pc-acemagic-ryzen5",
+    name: "Mini PC ACEMAGIC Vista Mini V1",
     category: "computadores",
-    description: "Montado e testado no nosso laboratório.",
-    price: 2199,
-    installments: 10,
+    specs: ["AMD Ryzen 5 série 7000", "16 GB de RAM", "500 GB de armazenamento"],
+    description: "Desempenho de computador de mesa em um aparelho que cabe na palma da mão.",
+    images: ["acemagic-vista-mini-v1-1.jpg", "acemagic-vista-mini-v1-2.jpg"],
+    price: 2980,
+    condition: "Novo",
     stock: "disponivel",
   },
   {
-    id: "monitor-24",
-    name: "Monitor 24\" Full HD IPS",
-    category: "perifericos",
-    description: "Imagem nítida e cores fiéis para o dia a dia.",
-    price: 849,
-    installments: 6,
-    badge: "Mais vendido",
-    stock: "disponivel",
-  },
-  {
-    id: "kit-teclado-mouse",
-    name: "Kit teclado e mouse sem fio",
-    category: "perifericos",
-    description: "Conexão estável e bateria de longa duração.",
-    price: 159,
-    stock: "disponivel",
-  },
-  {
-    id: "memoria-8gb",
-    name: "Memória RAM 8 GB DDR4",
-    category: "componentes",
-    description: "Upgrade rápido para deixar o computador mais ágil.",
-    stock: "encomenda",
-  },
-  {
-    id: "roteador-dual-band",
-    name: "Roteador Wi-Fi Dual Band",
-    category: "redes",
-    description: "Mais alcance e estabilidade para casa ou escritório.",
-    price: 289,
-    installments: 3,
-    badge: "Novo",
-    stock: "disponivel",
-  },
-  {
-    id: "ssd-480",
-    name: "SSD 480 GB SATA",
-    category: "armazenamento",
-    description: "Seu computador ligando em segundos. Instalação disponível.",
-    price: 229,
-    oldPrice: 269,
-    installments: 3,
-    badge: "Oferta",
-    stock: "disponivel",
-  },
-  {
-    id: "headset-usb",
-    name: "Headset USB com microfone",
-    category: "acessorios",
-    description: "Ideal para reuniões online e chamadas.",
-    price: 139,
+    id: "mini-pc-essenx-i5",
+    name: "Mini PC Essenx",
+    category: "computadores",
+    specs: ["Intel Core i5 11ª geração", "16 GB de RAM", "500 GB de armazenamento"],
+    description: "Compacto, libera espaço na mesa do escritório ou de casa.",
+    images: ["essenx-mini-pc-1.jpg", "essenx-mini-pc-2.jpg"],
+    price: 2980,
+    condition: "Novo",
     stock: "disponivel",
   },
 ];
@@ -199,8 +163,9 @@ export function discountPercent(product: Product) {
 }
 
 export function productMessage(product: Product) {
+  const specs = product.specs?.length ? ` - ${product.specs.join(", ")}` : "";
   const price = product.price ? ` (${formatBRL(product.price)})` : "";
-  return `Olá, Technolife! Tenho interesse no produto "${product.name}"${price}. Está disponível?`;
+  return `Olá, Technolife! Tenho interesse no produto "${product.name}${specs}"${price}. Está disponível?`;
 }
 
 export function categoryOf(id: CategoryId) {

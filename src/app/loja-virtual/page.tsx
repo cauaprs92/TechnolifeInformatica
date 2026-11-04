@@ -8,6 +8,7 @@ import {
   PriceBlock,
   ProductBadges,
   ProductImage,
+  SpecList,
   StockStatus,
 } from "@/components/shop/ProductCard";
 import { whatsappLink } from "@/lib/nav";
@@ -105,14 +106,14 @@ export default function LojaVirtualPage() {
                 <div className="flex items-center justify-between gap-3 bg-signal px-5 py-3 text-white">
                   <span className="eyebrow text-white">
                     <Flame className="size-4" />
-                    Oferta em destaque
+                    Em destaque
                   </span>
                   <StockStatus
                     product={featured}
                     className="text-white/90 [&>span]:ring-2 [&>span]:ring-white/60"
                   />
                 </div>
-                <div className="relative aspect-[16/10] overflow-hidden border-b border-line">
+                <div className="relative aspect-square overflow-hidden border-b border-line bg-paper sm:aspect-[6/5]">
                   <ProductBadges product={featured} />
                   <ProductImage product={featured} sizes="(min-width: 1024px) 40vw, 100vw" priority />
                 </div>
@@ -123,6 +124,9 @@ export default function LojaVirtualPage() {
                   <h2 className="mt-2 font-display text-2xl leading-tight font-bold [font-variation-settings:'wdth'_88]">
                     {featured.name}
                   </h2>
+                  <div className="mt-3">
+                    <SpecList product={featured} />
+                  </div>
                   <div className="mt-5 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
                     <PriceBlock product={featured} size="lg" />
                     <a

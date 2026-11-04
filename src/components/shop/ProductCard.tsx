@@ -6,8 +6,12 @@ import { WhatsAppIcon } from "../icons";
 
 const badgeStyles: Record<NonNullable<Product["badge"]>, string> = {
   Oferta: "bg-signal text-white",
-  Novo: "bg-navy text-white",
   "Mais vendido": "bg-ink text-white",
+};
+
+const conditionStyles: Record<NonNullable<Product["condition"]>, string> = {
+  Novo: "bg-navy text-white",
+  Seminovo: "bg-white text-ink ring-1 ring-line",
 };
 
 const stockInfo: Record<NonNullable<Product["stock"]>, { label: string; dot: string }> = {
@@ -16,7 +20,11 @@ const stockInfo: Record<NonNullable<Product["stock"]>, { label: string; dot: str
   encomenda: { label: "Sob encomenda", dot: "bg-body/50" },
 };
 
-/** Foto do produto ou, enquanto não houver, um espaço reservado com o ícone da categoria. */
+/**
+ * Foto do produto, com a segunda foto aparecendo ao passar o mouse.
+ * Sem foto, mostra um espaço reservado com o ícone da categoria.
+ * As fotos são verticais e o produto fica na parte de baixo, por isso o recorte desce um pouco.
+ */
 export function ProductImage({
   product,
   sizes,
@@ -26,16 +34,31 @@ export function ProductImage({
   sizes: string;
   priority?: boolean;
 }) {
-  if (product.image) {
+  const [first, second] = product.images ?? [];
+
+  if (first) {
+    const photo = "object-cover object-[50%_80%] transition duration-500";
     return (
-      <Image
-        src={`/images/loja/${product.image}`}
-        alt={product.name}
-        fill
-        sizes={sizes}
-        loading={priority ? "eager" : "lazy"}
-        className="object-contain p-6 transition duration-500 group-hover:scale-105"
-      />
+      <>
+        <Image
+          src={`/images/loja/${first}`}
+          alt={product.name}
+          fill
+          sizes={sizes}
+          loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : undefined}
+          className={`${photo} group-hover:scale-105`}
+        />
+        {second && (
+          <Image
+            src={`/images/loja/${second}`}
+            alt=""
+            fill
+            sizes={sizes}
+            className={`${photo} opacity-0 group-hover:scale-105 group-hover:opacity-100`}
+          />
+        )}
+      </>
     );
   }
 
@@ -97,9 +120,14 @@ export function StockStatus({ product, className = "" }: { product: Product; cla
 
 export function ProductBadges({ product }: { product: Product }) {
   const discount = discountPercent(product);
-  if (!product.badge && !discount) return null;
+  if (!product.condition && !product.badge && !discount) return null;
   return (
     <div className="absolute top-3 left-3 z-10 flex flex-wrap gap-1.5">
+      {product.condition && (
+        <span className={`rounded-full px-2.5 py-1 text-xs font-semibold shadow-sm ${conditionStyles[product.condition]}`}>
+          {product.condition}
+        </span>
+      )}
       {product.badge && (
         <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${badgeStyles[product.badge]}`}>
           {product.badge}
@@ -114,12 +142,30 @@ export function ProductBadges({ product }: { product: Product }) {
   );
 }
 
+export function SpecList({ product, tone = "light" }: { product: Product; tone?: "light" | "card" }) {
+  if (!product.specs?.length) return null;
+  return (
+    <ul className="flex flex-wrap gap-1.5" aria-label="Configuração">
+      {product.specs.map((spec) => (
+        <li
+          key={spec}
+          className={`rounded-lg px-2.5 py-1 text-xs font-medium text-ink ${
+            tone === "card" ? "bg-paper" : "bg-paper ring-1 ring-line"
+          }`}
+        >
+          {spec}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export default function ProductCard({ product }: { product: Product }) {
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white transition duration-300 hover:-translate-y-1 hover:border-navy/25 hover:shadow-[0_28px_60px_-32px_rgb(43_46_121/0.45)]">
-      <div className="relative aspect-[4/3] overflow-hidden border-b border-line bg-white">
+      <div className="relative aspect-square overflow-hidden border-b border-line bg-paper">
         <ProductBadges product={product} />
-        <ProductImage product={product} sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" />
+        <ProductImage product={product} sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" />
       </div>
 
       <div className="flex flex-1 flex-col p-5 sm:p-6">
@@ -127,8 +173,11 @@ export default function ProductCard({ product }: { product: Product }) {
           <span className="eyebrow text-[0.68rem] text-navy/70">{categoryOf(product.category).title}</span>
           <StockStatus product={product} />
         </div>
-        <h3 className="mt-3 text-lg leading-snug font-bold text-ink">{product.name}</h3>
-        <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-body">{product.description}</p>
+        <h3 className="mt-3 text-xl leading-snug font-bold text-ink">{product.name}</h3>
+        <div className="mt-3">
+          <SpecList product={product} tone="card" />
+        </div>
+        <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-body">{product.description}</p>
 
         <div className="mt-auto pt-6">
           <PriceBlock product={product} />
