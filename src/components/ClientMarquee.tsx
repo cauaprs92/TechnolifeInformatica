@@ -27,7 +27,7 @@ export default function ClientMarquee({
                       width={client.width}
                       height={client.height}
                       style={{ height: logoHeight(client.width, client.height, 4600, 52) }}
-                      className="w-auto opacity-75 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
+                      className="w-auto"
                     />
                   </li>
                 ))}
