@@ -160,19 +160,21 @@ export default function SobrePage() {
                 <p className="mt-3 text-xl leading-snug font-semibold text-ink">{value.promise}</p>
                 <p className="mt-3 leading-relaxed text-body">{value.text}</p>
 
-                <div className="mt-auto pt-8">
-                  <p className="eyebrow border-t border-line pt-6 text-[0.68rem] text-signal">
-                    Na prática
-                  </p>
-                  <ul className="mt-4 grid gap-3">
-                    {value.points.map((point) => (
-                      <li key={point} className="flex items-start gap-3 text-sm font-medium text-ink">
-                        <Check className="mt-0.5 size-4 shrink-0 text-signal" />
-                        {point}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                <ul className="mt-auto grid gap-4 pt-8">
+                  {value.points.map((point, i) => (
+                    <li
+                      key={point}
+                      className={`flex items-start gap-3.5 text-lg leading-snug font-semibold text-ink ${
+                        i === 0 ? "border-t border-line pt-7" : ""
+                      }`}
+                    >
+                      <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-signal text-white">
+                        <Check className="size-3.5" strokeWidth={3} />
+                      </span>
+                      {point}
+                    </li>
+                  ))}
+                </ul>
               </li>
             ))}
           </ol>
