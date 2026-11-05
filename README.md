@@ -4,8 +4,8 @@
 
 ### Assistência técnica, loja virtual e soluções em tecnologia
 
-<a href="https://technolifeinformatica.vercel.app/">
-  <img src="https://img.shields.io/badge/🌐_ACESSAR_SITE-technolifeinformatica.vercel.app-2563eb?style=for-the-badge&labelColor=0f172a" alt="Acessar site" />
+<a href="https://technolife-informatica.vercel.app/">
+  <img src="https://img.shields.io/badge/🌐_ACESSAR_SITE-technolife--informatica.vercel.app-2563eb?style=for-the-badge&labelColor=0f172a" alt="Acessar site" />
 </a>
 
 <br/><br/>
@@ -14,7 +14,7 @@
 [![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-4-38BDF8?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
-[![Deploy](https://img.shields.io/badge/Deploy-Vercel-000000?style=flat-square&logo=vercel)](https://technolifeinformatica.vercel.app/)
+[![Deploy](https://img.shields.io/badge/Deploy-Vercel-000000?style=flat-square&logo=vercel)](https://technolife-informatica.vercel.app/)
 
 </div>
 
@@ -24,7 +24,7 @@
 
 <div align="center">
 
-### ➡️ **[https://technolifeinformatica.vercel.app/](https://technolifeinformatica.vercel.app/)** ⬅️
+### ➡️ **[https://technolife-informatica.vercel.app/](https://technolife-informatica.vercel.app/)** ⬅️
 
 </div>
 
@@ -69,7 +69,7 @@ O projeto está publicado na Vercel:
 
 <div align="center">
 
-**[🌐 technolifeinformatica.vercel.app](https://technolifeinformatica.vercel.app/)**
+**[🌐 technolife-informatica.vercel.app](https://technolife-informatica.vercel.app/)**
 
 </div>
 

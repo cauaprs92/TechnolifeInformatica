@@ -23,7 +23,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://technolifeinformatica.vercel.app"),
+  metadataBase: new URL("https://technolife-informatica.vercel.app"),
   title: {
     default: "Technolife Informática | Suporte técnico com agilidade e confiança",
     template: "%s | Technolife Informática",
