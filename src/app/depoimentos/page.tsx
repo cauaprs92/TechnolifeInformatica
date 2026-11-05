@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
-import Testimonials from "@/components/Testimonials";
+import TestimonialList from "@/components/TestimonialList";
 import ClientMarquee from "@/components/ClientMarquee";
 import CtaBand from "@/components/CtaBand";
 
@@ -15,9 +15,9 @@ export default function DepoimentosPage() {
       <PageHeader
         crumb="Depoimentos"
         title="O que nossos clientes dizem."
-        subtitle="Empresas e pessoas que contam com a Technolife no dia a dia."
+        subtitle="Diretores e gestores de empresas que contam com a Technolife, alguns há mais de 20 anos."
       />
-      <Testimonials showAllLink={false} />
+      <TestimonialList />
       <ClientMarquee />
       <CtaBand />
     </>
