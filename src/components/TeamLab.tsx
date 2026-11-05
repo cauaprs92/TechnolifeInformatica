@@ -35,8 +35,8 @@ export default function TeamLab({ showLink = true }: { showLink?: boolean }) {
         <div className="reveal relative pb-[22%] sm:pb-[18%]">
           <div className="relative w-[88%] overflow-hidden rounded-panel">
             <Image
-              src={recepcao}
-              alt="Recepção da Technolife Informática, com o logo da empresa na parede"
+              src={tecnico}
+              alt="Técnico da Technolife na bancada do laboratório"
               placeholder="blur"
               sizes="(min-width: 1024px) 45vw, 90vw"
               className="h-auto w-full"
@@ -44,8 +44,8 @@ export default function TeamLab({ showLink = true }: { showLink?: boolean }) {
           </div>
           <div className="absolute right-0 bottom-0 w-[52%] overflow-hidden rounded-3xl shadow-2xl ring-8 shadow-ink/25 ring-white">
             <Image
-              src={tecnico}
-              alt="Técnico da Technolife na bancada do laboratório"
+              src={recepcao}
+              alt="Recepção da Technolife Informática, com o logo da empresa na parede"
               placeholder="blur"
               sizes="(min-width: 1024px) 25vw, 50vw"
               className="h-auto w-full"

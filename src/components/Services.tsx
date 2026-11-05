@@ -6,7 +6,8 @@ export default function Services() {
   return (
     <section id="servicos" className="bg-paper py-20 lg:py-28">
       <div className="shell grid gap-5 lg:grid-cols-2">
-        {audiences.map((audience, index) => {
+        {/* Público geral primeiro (card azul), empresas em seguida */}
+        {[...audiences].reverse().map((audience, index) => {
           const dark = index === 0;
           return (
             <article
