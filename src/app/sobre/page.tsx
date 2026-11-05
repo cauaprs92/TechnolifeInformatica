@@ -4,14 +4,29 @@ import SectionHeading from "@/components/SectionHeading";
 import TeamLab from "@/components/TeamLab";
 import ClientMarquee from "@/components/ClientMarquee";
 import CtaBand from "@/components/CtaBand";
-import { SignalMark } from "@/components/icons";
+import { Check } from "lucide-react";
+import { SignalArcs, SignalMark, WhatsAppIcon } from "@/components/icons";
 import { values } from "@/lib/data";
-import { siteInfo } from "@/lib/nav";
+import { whatsappLink } from "@/lib/nav";
 
 export const metadata: Metadata = {
   title: "Sobre nós",
   description: "Conheça a história, a equipe e o laboratório da Technolife Informática.",
 };
+
+const FOUNDED = 2002;
+
+const facts = [
+  { label: "Fundação", value: String(FOUNDED) },
+  // Calculado no build, para não ficar desatualizado
+  { label: "Anos de experiência", value: `+${new Date().getFullYear() - FOUNDED - 1}` },
+];
+
+const contractItems = [
+  "Horas de deslocamento e de atendimento cobertas",
+  "Atendimento presencial, remoto e por telefone",
+  "Profissionais graduados e experientes",
+];
 
 export default function SobrePage() {
   return (
@@ -24,30 +39,73 @@ export default function SobrePage() {
 
       <section className="bg-white py-20 lg:py-28">
         <div className="shell grid gap-12 lg:grid-cols-12 lg:gap-16">
-          <SectionHeading
-            eyebrow="Nossa história"
-            title="Suporte técnico ágil e confiável desde o primeiro dia."
-            className="lg:sticky lg:top-28 lg:col-span-5 lg:self-start"
-          />
+          <div className="lg:sticky lg:top-28 lg:col-span-5 lg:self-start">
+            <SectionHeading
+              eyebrow="Nossa história"
+              title="Desde 2002 cuidando da TI de empresas e pessoas."
+            />
+            <dl className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-line bg-line">
+              {facts.map((fact) => (
+                <div key={fact.label} className="bg-white p-5 sm:p-6">
+                  <dt className="eyebrow text-[0.68rem] text-body">{fact.label}</dt>
+                  <dd className="mt-2 font-display text-4xl font-extrabold text-ink [font-variation-settings:'wdth'_80]">
+                    {fact.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
 
           <div className="grid gap-5 text-lg leading-relaxed text-body lg:col-span-7">
             <p>
-              A Technolife Informática nasceu com o propósito de oferecer suporte técnico ágil e
-              confiável, ajudando empresas e pessoas a produzir, transmitir e proteger suas
-              informações.
+              Fundada em janeiro de 2002, a Technolife Informática nasceu com a vocação de prestar
+              serviços e vender produtos de TI. Com a experiência, veio também um compromisso: levar
+              às empresas soluções realmente eficientes, com valor justo.
             </p>
             <p>
-              Ao longo dos anos construímos uma base sólida de clientes que confiam em nosso
-              trabalho, seja para manter a infraestrutura de TI de uma empresa funcionando, seja
-              para resolver o problema do dia a dia de um computador ou notebook.
+              Somos especializados na venda de produtos de TI, em projetos, instalação e
+              administração de redes de computadores, e na manutenção física e lógica de estações
+              de trabalho e servidores. Nosso laboratório está preparado para receber o seu
+              equipamento, e o time comercial acompanha as tecnologias mais recentes para oferecer
+              uma consultoria de qualidade.
             </p>
-            <figure className="mt-4 rounded-panel bg-paper p-8 sm:p-10">
-              <SignalMark className="size-6 text-signal" />
-              <blockquote className="mt-5 font-display text-2xl leading-snug font-semibold text-ink [font-variation-settings:'wdth'_88] sm:text-3xl">
-                <p>{siteInfo.tagline}</p>
-              </blockquote>
-              <figcaption className="eyebrow mt-5 text-body">Nosso propósito</figcaption>
-            </figure>
+
+            <article className="relative isolate mt-4 overflow-hidden rounded-panel bg-ink p-8 text-white sm:p-10">
+              <SignalArcs
+                className="pointer-events-none absolute -right-16 -bottom-16 -z-10 size-72 -scale-x-100 text-white/[0.06]"
+                strokeWidth={30}
+              />
+              <span className="eyebrow text-signal-light">
+                <SignalMark className="size-3.5" />
+                Contrato de manutenção
+              </span>
+              <h3 className="mt-4 text-3xl leading-tight font-bold sm:text-4xl">
+                Valor mensal fixo, sem surpresa na conta.
+              </h3>
+              <p className="mt-4 text-white/70">
+                Um contrato personalizado para a sua empresa aproveitar ao máximo os equipamentos
+                que já tem, com competência comprovada por clientes atendidos ao longo dos anos.
+              </p>
+              <ul className="mt-6 grid gap-3 text-base">
+                {contractItems.map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <Check className="mt-1 size-4 shrink-0 text-signal-light" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href={whatsappLink(
+                  "Olá, Technolife! Gostaria de uma proposta de contrato de manutenção para minha empresa.",
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary mt-8"
+              >
+                <WhatsAppIcon className="size-5" />
+                Solicitar proposta
+              </a>
+            </article>
           </div>
         </div>
 
