@@ -18,7 +18,7 @@ export default function Clients() {
           </p>
         </div>
 
-        <ul className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-panel border border-line bg-line sm:grid-cols-3 lg:grid-cols-6">
+        <ul className="mt-14 grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-3 lg:grid-cols-6">
           {clients.map((client) => (
             <li
               key={client.file}
