@@ -16,10 +16,14 @@ export const metadata: Metadata = {
 
 const FOUNDED = 2002;
 
-const facts = [
-  { label: "Fundação", value: String(FOUNDED) },
+const facts: { value: string; unit?: string; label: string }[] = [
+  { value: String(FOUNDED), label: "Ano de fundação, em janeiro. Mais de duas décadas no mercado de TI." },
   // Calculado no build, para não ficar desatualizado
-  { label: "Anos de experiência", value: `+${new Date().getFullYear() - FOUNDED - 1}` },
+  {
+    value: `+${new Date().getFullYear() - FOUNDED - 1}`,
+    unit: "anos",
+    label: "de experiência em assistência técnica para empresas e residências.",
+  },
 ];
 
 const contractItems = [
@@ -38,23 +42,12 @@ export default function SobrePage() {
       />
 
       <section className="bg-white py-20 lg:py-28">
-        <div className="shell grid gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:sticky lg:top-28 lg:col-span-5 lg:self-start">
-            <SectionHeading
-              eyebrow="Nossa história"
-              title="Desde 2002 cuidando da TI de empresas e pessoas."
-            />
-            <dl className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-line bg-line">
-              {facts.map((fact) => (
-                <div key={fact.label} className="bg-white p-5 sm:p-6">
-                  <dt className="eyebrow text-[0.68rem] text-body">{fact.label}</dt>
-                  <dd className="mt-2 font-display text-4xl font-extrabold text-ink [font-variation-settings:'wdth'_80]">
-                    {fact.value}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </div>
+        <div className="shell grid gap-10 lg:grid-cols-12 lg:gap-16">
+          <SectionHeading
+            eyebrow="Nossa história"
+            title="Desde 2002 cuidando da TI de empresas e pessoas."
+            className="lg:col-span-5"
+          />
 
           <div className="grid gap-5 text-lg leading-relaxed text-body lg:col-span-7">
             <p>
@@ -69,44 +62,69 @@ export default function SobrePage() {
               equipamento, e o time comercial acompanha as tecnologias mais recentes para oferecer
               uma consultoria de qualidade.
             </p>
-
-            <article className="relative isolate mt-4 overflow-hidden rounded-panel bg-ink p-8 text-white sm:p-10">
-              <SignalArcs
-                className="pointer-events-none absolute -right-16 -bottom-16 -z-10 size-72 -scale-x-100 text-white/[0.06]"
-                strokeWidth={30}
-              />
-              <span className="eyebrow text-signal-light">
-                <SignalMark className="size-3.5" />
-                Contrato de manutenção
-              </span>
-              <h3 className="mt-4 text-3xl leading-tight font-bold sm:text-4xl">
-                Valor mensal fixo, sem surpresa na conta.
-              </h3>
-              <p className="mt-4 text-white/70">
-                Um contrato personalizado para a sua empresa aproveitar ao máximo os equipamentos
-                que já tem, com competência comprovada por clientes atendidos ao longo dos anos.
-              </p>
-              <ul className="mt-6 grid gap-3 text-base">
-                {contractItems.map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <Check className="mt-1 size-4 shrink-0 text-signal-light" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <a
-                href={whatsappLink(
-                  "Olá, Technolife! Gostaria de uma proposta de contrato de manutenção para minha empresa.",
-                )}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary mt-8"
-              >
-                <WhatsAppIcon className="size-5" />
-                Solicitar proposta
-              </a>
-            </article>
           </div>
+        </div>
+
+        {/* Dois cards lado a lado, com a mesma altura */}
+        <div className="shell mt-14 grid gap-5 lg:grid-cols-12">
+          <div className="reveal relative isolate flex flex-col overflow-hidden rounded-panel bg-signal p-8 text-white sm:p-10 lg:col-span-5">
+            <SignalArcs
+              className="pointer-events-none absolute -top-20 -right-20 -z-10 size-72 rotate-180 text-white/10"
+              strokeWidth={30}
+            />
+            <span className="eyebrow text-white/80">
+              <SignalMark className="size-3.5" />
+              Nossa trajetória
+            </span>
+            <dl className="mt-8 flex flex-1 flex-col justify-center divide-y divide-white/20">
+              {facts.map((fact) => (
+                <div key={fact.label} className="flex flex-col-reverse py-6 first:pt-0 last:pb-0">
+                  <dt className="mt-3 max-w-xs leading-snug text-white/85">{fact.label}</dt>
+                  <dd className="font-display text-7xl leading-none font-extrabold [font-variation-settings:'wdth'_78] sm:text-8xl">
+                    {fact.value}
+                    {fact.unit && <span className="ml-2 text-3xl sm:text-4xl">{fact.unit}</span>}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          <article className="reveal relative isolate flex flex-col overflow-hidden rounded-panel bg-ink p-8 text-white sm:p-10 lg:col-span-7">
+            <SignalArcs
+              className="pointer-events-none absolute -right-16 -bottom-16 -z-10 size-72 -scale-x-100 text-white/[0.06]"
+              strokeWidth={30}
+            />
+            <span className="eyebrow text-signal-light">
+              <SignalMark className="size-3.5" />
+              Contrato de manutenção
+            </span>
+            <h3 className="mt-4 text-3xl leading-tight font-bold sm:text-4xl">
+              Valor mensal fixo, sem surpresa na conta.
+            </h3>
+            <p className="mt-4 text-white/70">
+              Um contrato personalizado para a sua empresa aproveitar ao máximo os equipamentos
+              que já tem, com competência comprovada por clientes atendidos ao longo dos anos.
+            </p>
+            <ul className="mt-6 mb-8 grid gap-3 text-base">
+              {contractItems.map((item) => (
+                <li key={item} className="flex items-start gap-3">
+                  <Check className="mt-1 size-4 shrink-0 text-signal-light" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <a
+              href={whatsappLink(
+                "Olá, Technolife! Gostaria de uma proposta de contrato de manutenção para minha empresa.",
+              )}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary mt-auto self-start"
+            >
+              <WhatsAppIcon className="size-5" />
+              Solicitar proposta
+            </a>
+          </article>
         </div>
 
         <ul className="shell mt-16 grid gap-5 md:grid-cols-3">
