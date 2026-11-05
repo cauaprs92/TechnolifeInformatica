@@ -27,7 +27,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-line/80 bg-white/85 backdrop-blur-xl">
-      <div className="shell flex h-18 items-center justify-between gap-6">
+      <div className="shell flex h-20 items-center lg:h-22 justify-between gap-6">
         <Link href="/" className="shrink-0" aria-label="Technolife Informática, página inicial">
           <Image
             src="/technolife-logo.png"
@@ -35,7 +35,7 @@ export default function Header() {
             width={243}
             height={129}
             loading="eager"
-            className="h-12 w-auto"
+            className="h-13 w-auto lg:h-14"
           />
         </Link>
 

@@ -26,7 +26,7 @@ export default function ProductCatalog() {
   return (
     <>
       {/* Filtro fixo abaixo do cabeçalho enquanto o cliente rola os produtos */}
-      <div className="sticky top-18 z-30 -mx-5 mt-10 border-y border-line bg-paper/90 px-5 py-3 backdrop-blur-xl sm:-mx-8 sm:px-8">
+      <div className="sticky top-20 z-30 lg:top-22 -mx-5 mt-10 border-y border-line bg-paper/90 px-5 py-3 backdrop-blur-xl sm:-mx-8 sm:px-8">
         <div
           role="toolbar"
           aria-label="Filtrar por categoria"
