@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
 import SectionHeading from "@/components/SectionHeading";
-import TeamLab from "@/components/TeamLab";
 import ClientMarquee from "@/components/ClientMarquee";
 import CtaBand from "@/components/CtaBand";
 import { Check } from "lucide-react";
@@ -182,9 +181,8 @@ export default function SobrePage() {
       </section>
 
       <div className="border-t border-line">
-        <TeamLab showLink={false} />
+        <ClientMarquee />
       </div>
-      <ClientMarquee />
       <CtaBand />
     </>
   );
