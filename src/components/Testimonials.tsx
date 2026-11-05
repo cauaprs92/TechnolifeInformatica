@@ -14,7 +14,7 @@ function initials(name: string) {
 
 /** Logo da empresa (quando existe na lista de clientes) ou as iniciais da pessoa. */
 export function CompanyMark({ testimonial, size = "md" }: { testimonial: Testimonial; size?: "md" | "lg" }) {
-  const client = clients.find((c) => c.name === testimonial.client);
+  const client = testimonial.logo ?? clients.find((c) => c.name === testimonial.client);
   const box = size === "lg" ? "h-20 w-32" : "h-12 w-20";
 
   if (client) {
@@ -22,7 +22,7 @@ export function CompanyMark({ testimonial, size = "md" }: { testimonial: Testimo
       <span className={`grid shrink-0 place-items-center rounded-2xl bg-white p-2 ring-1 ring-line ${box}`}>
         <Image
           src={`/images/clientes/${client.file}`}
-          alt={client.name}
+          alt={testimonial.company}
           width={client.width}
           height={client.height}
           className="max-h-full w-auto max-w-full object-contain"

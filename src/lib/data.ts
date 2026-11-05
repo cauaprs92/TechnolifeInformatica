@@ -188,6 +188,8 @@ export type Testimonial = {
   company: string;
   /** Nome igual ao da lista `clients`, para mostrar o logo. Sem logo, aparecem as iniciais. */
   client?: string;
+  /** Logo de empresa que não está na lista `clients` (arquivo em /public/images/clientes). */
+  logo?: { file: string; width: number; height: number };
   since?: string;
   /** Trecho curto em destaque (cards da página inicial e de clientes). */
   highlight: string;
@@ -254,6 +256,7 @@ export const testimonials: Testimonial[] = [
     name: "Rogério Saraiva",
     role: "Proprietário",
     company: "Protesolda do Vale",
+    logo: { file: "protesolda.png", width: 142, height: 69 },
     highlight:
       "Hoje não me preocupo mais com configurações de rede, impressoras, nobreaks etc. Uma das melhores decisões que tomei na empresa.",
     body: [
