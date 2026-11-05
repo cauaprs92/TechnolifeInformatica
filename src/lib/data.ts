@@ -112,10 +112,47 @@ export const steps: { title: string; text: string; icon: LucideIcon }[] = [
   },
 ];
 
-export const values: { title: string; text: string; icon: LucideIcon }[] = [
-  { title: "Agilidade", text: "Atendimento rápido para a sua rotina não parar.", icon: Zap },
-  { title: "Confiança", text: "Clareza sobre o que foi feito no seu equipamento e por quê.", icon: ShieldCheck },
-  { title: "Proximidade", text: "Atendimento presencial, remoto e em laboratório próprio.", icon: Handshake },
+/** Compromissos da página Sobre: a promessa e como ela aparece no dia a dia. */
+export const values: {
+  title: string;
+  promise: string;
+  text: string;
+  points: string[];
+  icon: LucideIcon;
+}[] = [
+  {
+    title: "Agilidade",
+    promise: "Sua rotina não pode parar esperando o técnico.",
+    text: "Escolhemos o caminho mais rápido para resolver. Muitas vezes, nem é preciso sair de casa ou da empresa.",
+    points: [
+      "Suporte remoto para resolver à distância",
+      "Técnico no local quando a situação pede",
+      "Laboratório próprio, sem depender de terceiros",
+    ],
+    icon: Zap,
+  },
+  {
+    title: "Confiança",
+    promise: "Você entende o que foi feito no seu equipamento.",
+    text: "Explicamos o diagnóstico em linguagem simples e indicamos só o que faz sentido para o seu uso.",
+    points: [
+      "Diagnóstico explicado antes do serviço",
+      "Indicação honesta de produtos e upgrades",
+      "Clientes que confiam na gente desde 2002",
+    ],
+    icon: ShieldCheck,
+  },
+  {
+    title: "Proximidade",
+    promise: "Atendimento de gente, não de protocolo.",
+    text: "Você fala direto com a equipe que cuida do seu equipamento, pelo canal que preferir.",
+    points: [
+      "Loja em São José dos Campos",
+      "WhatsApp, telefone ou visita presencial",
+      "Acompanhamento depois do serviço",
+    ],
+    icon: Handshake,
+  },
 ];
 
 /** Logos recortados em /public/images/clientes. width/height = tamanho real do arquivo. */

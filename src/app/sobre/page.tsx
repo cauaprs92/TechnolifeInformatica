@@ -127,17 +127,56 @@ export default function SobrePage() {
           </article>
         </div>
 
-        <ul className="shell mt-16 grid gap-5 md:grid-cols-3">
-          {values.map((value) => (
-            <li key={value.title} className="reveal rounded-3xl border border-line p-7 sm:p-8">
-              <span className="grid size-12 place-items-center rounded-2xl bg-ink text-white">
-                <value.icon className="size-5" />
-              </span>
-              <h3 className="mt-6 text-3xl font-extrabold text-ink">{value.title}</h3>
-              <p className="mt-2 leading-relaxed text-body">{value.text}</p>
-            </li>
-          ))}
-        </ul>
+        {/* Compromissos: promessa + como ela aparece na prática */}
+        <div className="shell mt-24 lg:mt-32">
+          <div className="grid gap-6 lg:grid-cols-12 lg:items-end">
+            <SectionHeading
+              eyebrow="Como trabalhamos"
+              title="Três compromissos com cada cliente."
+              className="lg:col-span-7"
+            />
+            <p className="text-lg leading-relaxed text-body lg:col-span-5">
+              Não são só palavras bonitas. É assim que cada atendimento acontece, da primeira
+              mensagem ao equipamento funcionando.
+            </p>
+          </div>
+
+          <ol className="mt-12 grid gap-px overflow-hidden rounded-panel border border-line bg-line md:grid-cols-3">
+            {values.map((value, index) => (
+              <li
+                key={value.title}
+                className="group reveal flex flex-col bg-white p-8 transition-colors duration-300 hover:bg-paper sm:p-10"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="grid size-14 place-items-center rounded-2xl bg-ink text-white transition-colors duration-300 group-hover:bg-signal">
+                    <value.icon className="size-6" />
+                  </span>
+                  <span className="font-mono text-sm font-medium text-body/50">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                </div>
+
+                <h3 className="mt-8 text-4xl font-extrabold text-ink">{value.title}</h3>
+                <p className="mt-3 text-xl leading-snug font-semibold text-ink">{value.promise}</p>
+                <p className="mt-3 leading-relaxed text-body">{value.text}</p>
+
+                <div className="mt-auto pt-8">
+                  <p className="eyebrow border-t border-line pt-6 text-[0.68rem] text-signal">
+                    Na prática
+                  </p>
+                  <ul className="mt-4 grid gap-3">
+                    {value.points.map((point) => (
+                      <li key={point} className="flex items-start gap-3 text-sm font-medium text-ink">
+                        <Check className="mt-0.5 size-4 shrink-0 text-signal" />
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
       </section>
 
       <div className="border-t border-line">
