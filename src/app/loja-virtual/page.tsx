@@ -8,6 +8,7 @@ import {
   PriceBlock,
   ProductBadges,
   ProductImage,
+  ReadyStrip,
   SpecList,
   StockStatus,
 } from "@/components/shop/ProductCard";
@@ -28,7 +29,12 @@ export const metadata: Metadata = {
     "Notebooks, computadores, periféricos e acessórios com garantia, parcelamento e suporte técnico Technolife.",
 };
 
-const heroFacts = ["Nota fiscal e garantia", "Parcelamento no cartão", "Suporte após a compra"];
+const heroFacts = [
+  "Windows 11 Pro + Office ativados",
+  "Nota fiscal e garantia",
+  "Parcelamento no cartão",
+  "Suporte após a compra",
+];
 
 export default function LojaVirtualPage() {
   const featured = products.find((p) => p.featured);
@@ -127,6 +133,11 @@ export default function LojaVirtualPage() {
                   <div className="mt-3">
                     <SpecList product={featured} />
                   </div>
+                  {featured.readyToUse && (
+                    <div className="mt-4">
+                      <ReadyStrip product={featured} />
+                    </div>
+                  )}
                   <div className="mt-5 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
                     <PriceBlock product={featured} size="lg" />
                     <a
@@ -190,13 +201,35 @@ export default function LojaVirtualPage() {
           />
           <ol className="grid gap-px overflow-hidden rounded-panel border border-line bg-line lg:col-span-7">
             {shopReasons.map((reason, index) => (
-              <li key={reason.title} className="reveal flex gap-5 bg-white p-6 sm:p-8">
-                <span className="font-mono text-sm font-medium text-signal">
+              <li
+                key={reason.title}
+                className={`reveal flex gap-5 p-6 sm:p-8 ${reason.highlight ? "bg-ink text-white" : "bg-white"}`}
+              >
+                <span
+                  className={`font-mono text-sm font-medium ${reason.highlight ? "text-signal-light" : "text-signal"}`}
+                >
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <div>
-                  <h3 className="text-2xl font-bold text-ink">{reason.title}</h3>
-                  <p className="mt-2 leading-relaxed text-body">{reason.text}</p>
+                  <h3 className={`text-2xl font-bold ${reason.highlight ? "text-white" : "text-ink"}`}>
+                    {reason.title}
+                  </h3>
+                  <p className={`mt-2 leading-relaxed ${reason.highlight ? "text-white/75" : "text-body"}`}>
+                    {reason.text}
+                  </p>
+                  {reason.highlight && (
+                    <ul className="mt-5 flex flex-wrap gap-2">
+                      {reason.highlight.map((item) => (
+                        <li
+                          key={item}
+                          className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-2 text-sm font-semibold ring-1 ring-white/15"
+                        >
+                          <Check className="size-4 text-signal-light" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               </li>
             ))}

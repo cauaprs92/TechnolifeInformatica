@@ -7,8 +7,8 @@ import {
   Headphones,
   Keyboard,
   Laptop,
+  MonitorCheck,
   Router,
-  Settings2,
   Store,
 } from "lucide-react";
 
@@ -57,9 +57,14 @@ export type Product = {
   condition?: "Novo" | "Seminovo";
   badge?: "Oferta" | "Mais vendido";
   stock?: "disponivel" | "ultimas" | "encomenda";
+  /** Computador que sai formatado, com Windows 11 Pro e Office ativados (mostra a faixa no card). */
+  readyToUse?: boolean;
   /** Produto em destaque no topo da página (use em apenas um). */
   featured?: boolean;
 };
+
+/** O que já vem instalado e ativado nos computadores marcados com `readyToUse`. */
+export const readySoftware = ["Windows 11 Pro ativado", "Pacote Office ativado"];
 
 export const products: Product[] = [
   {
@@ -72,6 +77,7 @@ export const products: Product[] = [
     price: 2290,
     condition: "Seminovo",
     stock: "disponivel",
+    readyToUse: true,
     featured: true,
   },
   {
@@ -84,6 +90,7 @@ export const products: Product[] = [
     price: 2980,
     condition: "Novo",
     stock: "disponivel",
+    readyToUse: true,
   },
   {
     id: "mini-pc-essenx-i5",
@@ -95,6 +102,7 @@ export const products: Product[] = [
     price: 2980,
     condition: "Novo",
     stock: "disponivel",
+    readyToUse: true,
   },
 ];
 
@@ -103,18 +111,19 @@ export const shopPerks: { title: string; text: string; icon: LucideIcon }[] = [
   { title: "Garantia", text: "Produtos com nota fiscal e garantia.", icon: BadgeCheck },
   { title: "Parcelamento", text: "Pix, débito ou cartão em até 10x.", icon: CreditCard },
   { title: "Retire na loja", text: "São José dos Campos, sem custo de frete.", icon: Store },
-  { title: "Instalação", text: "Configuramos o equipamento para você.", icon: Settings2 },
+  { title: "Pronto para usar", text: "Windows 11 Pro e Office ativados.", icon: MonitorCheck },
 ];
 
 /** Diferenciais da loja: o que o cliente ganha ao comprar de quem também faz o suporte. */
-export const shopReasons: { title: string; text: string }[] = [
+export const shopReasons: { title: string; text: string; highlight?: string[] }[] = [
   {
     title: "Indicação honesta",
     text: "Você conta como vai usar e indicamos o produto certo, sem empurrar o mais caro.",
   },
   {
     title: "Sai pronto para usar",
-    text: "Computadores e notebooks podem sair formatados, configurados e com seus programas.",
+    text: "Computadores e notebooks saem formatados, com o sistema e o pacote Office instalados e ativados. É só ligar e trabalhar.",
+    highlight: readySoftware,
   },
   {
     title: "Suporte depois da compra",
@@ -129,6 +138,10 @@ export const buySteps: { title: string; text: string }[] = [
 ];
 
 export const shopFaq: { question: string; answer: string }[] = [
+  {
+    question: "Os computadores já vêm com Windows e Office?",
+    answer: "Sim. Computadores e notebooks saem formatados, com Windows 11 Pro e o pacote Office instalados e ativados, prontos para usar.",
+  },
   {
     question: "Quais são as formas de pagamento?",
     answer: "Pix, cartão de débito e cartão de crédito em até 10x. Confirme as condições de cada produto no WhatsApp.",

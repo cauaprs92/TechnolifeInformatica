@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { LucideIcon } from "lucide-react";
+import { MonitorCheck, type LucideIcon } from "lucide-react";
 import { whatsappLink } from "@/lib/nav";
 import { type Product, categoryOf, discountPercent, formatBRL, productMessage } from "@/lib/shop";
 import { WhatsAppIcon } from "../icons";
@@ -160,6 +160,20 @@ export function SpecList({ product, tone = "light" }: { product: Product; tone?:
   );
 }
 
+/** Faixa de destaque: o computador sai formatado, com Windows 11 Pro e Office ativados. */
+export function ReadyStrip({ product }: { product: Product }) {
+  if (!product.readyToUse) return null;
+  return (
+    <div className="flex items-center gap-3 rounded-2xl bg-ink px-4 py-3 text-white">
+      <MonitorCheck className="size-5 shrink-0 text-signal-light" />
+      <p className="text-sm leading-snug">
+        <span className="block font-semibold">Pronto para usar</span>
+        <span className="text-white/75">Windows 11 Pro + Office ativados</span>
+      </p>
+    </div>
+  );
+}
+
 export default function ProductCard({ product }: { product: Product }) {
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white transition duration-300 hover:-translate-y-1 hover:border-navy/25 hover:shadow-[0_28px_60px_-32px_rgb(43_46_121/0.45)]">
@@ -177,6 +191,11 @@ export default function ProductCard({ product }: { product: Product }) {
         <div className="mt-3">
           <SpecList product={product} tone="card" />
         </div>
+        {product.readyToUse && (
+          <div className="mt-4">
+            <ReadyStrip product={product} />
+          </div>
+        )}
         <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-body">{product.description}</p>
 
         <div className="mt-auto pt-6">
