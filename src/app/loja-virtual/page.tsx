@@ -61,7 +61,7 @@ export default function LojaVirtualPage() {
           <div className={featured ? "lg:col-span-7" : "max-w-3xl"}>
             <nav aria-label="Você está em" className="rise eyebrow text-white/50">
               <Link href="/" className="transition hover:text-white">
-                Início
+                Home
               </Link>
               <span aria-hidden="true">/</span>
               <span className="text-signal-light">Loja Virtual</span>
@@ -177,7 +177,7 @@ export default function LojaVirtualPage() {
       </section>
 
       {/* 3. Catálogo com filtro por categoria */}
-      <section id="produtos" className="scroll-mt-20 bg-paper lg:scroll-mt-22 py-20 lg:py-24">
+      <section id="produtos" className="scroll-mt-20 bg-paper lg:scroll-mt-24 xl:scroll-mt-28 py-20 lg:py-24">
         <div className="shell">
           <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
             <SectionHeading eyebrow="Produtos" title="Escolha o seu." className="lg:col-span-7" />

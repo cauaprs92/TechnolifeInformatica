@@ -25,7 +25,7 @@ export default function PageHeader({
       <div className="shell py-16 sm:py-20 lg:py-24">
         <nav aria-label="Você está em" className="rise eyebrow text-white/50">
           <Link href="/" className="transition hover:text-white">
-            Início
+            Home
           </Link>
           <span aria-hidden="true">/</span>
           <span className="text-signal-light">{crumb}</span>

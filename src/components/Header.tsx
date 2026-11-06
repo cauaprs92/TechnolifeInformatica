@@ -27,7 +27,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-line/80 bg-white/85 backdrop-blur-xl">
-      <div className="shell flex h-20 items-center lg:h-22 justify-between gap-6">
+      <div className="shell flex h-20 items-center justify-between gap-6 lg:h-24 xl:h-28">
         <Link href="/" className="shrink-0" aria-label="Technolife Informática, página inicial">
           <Image
             src="/technolife-logo.png"
@@ -35,7 +35,7 @@ export default function Header() {
             width={243}
             height={129}
             loading="eager"
-            className="h-13 w-auto lg:h-14"
+            className="h-13 w-auto lg:h-16 xl:h-24"
           />
         </Link>
 
@@ -48,13 +48,13 @@ export default function Header() {
                   <Link
                     href={link.href}
                     aria-current={active ? "page" : undefined}
-                    className={`relative block rounded-full px-3.5 py-2 text-[0.92rem] font-medium transition-colors ${
+                    className={`relative block rounded-full px-3.5 py-2 text-[0.92rem] font-medium transition-colors xl:px-4 xl:text-[1.05rem] ${
                       active ? "text-ink" : "text-body hover:text-ink"
                     }`}
                   >
                     {link.label}
                     {active && (
-                      <span className="absolute inset-x-3.5 bottom-0.5 h-0.5 rounded-full bg-signal" />
+                      <span className="absolute inset-x-3.5 bottom-0.5 xl:inset-x-4 h-0.5 rounded-full bg-signal" />
                     )}
                   </Link>
                 </li>
@@ -68,9 +68,9 @@ export default function Header() {
             href={whatsappLink()}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-primary hidden !px-4 !py-2.5 text-sm sm:inline-flex"
+            className="btn btn-primary hidden !px-4 !py-2.5 text-sm sm:inline-flex xl:!px-5 xl:!py-3 xl:text-base"
           >
-            <WhatsAppIcon className="size-4" />
+            <WhatsAppIcon className="size-4 xl:size-5" />
             Fale conosco
           </a>
           <button
