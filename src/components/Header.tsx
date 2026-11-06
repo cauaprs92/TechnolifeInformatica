@@ -15,6 +15,14 @@ function isActive(pathname: string, href: string) {
 export default function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Sombra suave quando a página rola, para a barra se separar do conteúdo
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -26,7 +34,13 @@ export default function Header() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line/80 bg-white/85 backdrop-blur-xl">
+    <header
+      className={`sticky top-0 z-50 border-b backdrop-blur-xl transition-[background-color,box-shadow,border-color] duration-300 ease-soft ${
+        scrolled
+          ? "border-line bg-white/95 shadow-[0_12px_32px_-24px_rgb(12_16_54/0.45)]"
+          : "border-line/80 bg-white/85"
+      }`}
+    >
       <div className="shell flex h-20 items-center justify-between gap-6 lg:h-24 xl:h-28">
         <Link href="/" className="shrink-0" aria-label="Technolife Informática, página inicial">
           <Image

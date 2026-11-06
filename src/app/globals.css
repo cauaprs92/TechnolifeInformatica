@@ -19,6 +19,21 @@
   --color-whatsapp: #1fae5b;
 
   --radius-panel: 1.75rem;
+
+  /*
+    Motion: poucas curvas e durações, usadas no site todo.
+    - out-expo: entradas (o elemento chega rápido e assenta devagar)
+    - soft: hovers e mudanças de estado
+  */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+:root {
+  --motion-fast: 180ms; /* hover, clique */
+  --motion-base: 420ms; /* abrir e fechar, trocar conteúdo */
+  --motion-slow: 800ms; /* entradas de blocos */
+  --motion-stagger: 70ms; /* atraso entre itens de uma lista */
 }
 
 @theme inline {
@@ -83,14 +98,20 @@
     line-height: 1;
     white-space: nowrap;
     transition:
-      transform 0.2s ease,
-      background-color 0.2s ease,
-      color 0.2s ease,
-      box-shadow 0.2s ease;
+      transform var(--motion-fast) var(--ease-soft),
+      background-color var(--motion-fast) var(--ease-soft),
+      color var(--motion-fast) var(--ease-soft),
+      box-shadow var(--motion-fast) var(--ease-soft);
   }
 
   .btn:hover {
     transform: translateY(-1px);
+  }
+
+  /* Resposta ao clique: o botão "afunda" um pouco */
+  .btn:active {
+    transform: translateY(0) scale(0.97);
+    transition-duration: 80ms;
   }
 
   .btn-primary {
@@ -197,6 +218,30 @@
   }
 }
 
+/* Arcos do logo "transmitindo": acendem um depois do outro, de dentro para fora */
+@keyframes signal-wave {
+  0%,
+  60%,
+  100% {
+    opacity: 0.25;
+  }
+  20% {
+    opacity: 1;
+  }
+}
+
+/* Cards que entram depois de uma troca de filtro */
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 @keyframes ping-soft {
   0% {
     transform: scale(1);
@@ -212,7 +257,38 @@
 @media (prefers-reduced-motion: no-preference) {
   /* Entrada do topo da página; --d define o atraso de cada bloco */
   .rise {
-    animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0ms) both;
+    animation: rise var(--motion-slow) var(--ease-out-expo) var(--d, 0ms) both;
+  }
+
+  .signal-wave {
+    animation: signal-wave 2.6s var(--ease-soft) calc(var(--i, 0) * 260ms) infinite;
+  }
+
+  .card-in {
+    animation: card-in var(--motion-base) var(--ease-out-expo)
+      calc(var(--i, 0) * var(--motion-stagger)) both;
+  }
+
+  /* Perguntas e depoimentos abrem deslizando, em vez de pular (navegadores que suportam) */
+  @supports (interpolate-size: allow-keywords) {
+    :root {
+      interpolate-size: allow-keywords;
+    }
+
+    details::details-content {
+      block-size: 0;
+      opacity: 0;
+      overflow-y: clip;
+      transition:
+        block-size var(--motion-base) var(--ease-out-expo),
+        opacity var(--motion-base) var(--ease-soft),
+        content-visibility var(--motion-base) allow-discrete;
+    }
+
+    details[open]::details-content {
+      block-size: auto;
+      opacity: 1;
+    }
   }
 
   .marquee-track {
@@ -227,13 +303,30 @@
     animation: ping-soft 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
   }
 
-  /* Surge ao rolar, só onde o navegador suporta; sem suporte, o conteúdo já está visível */
+  /* Surge ao rolar. Onde o navegador suporta, a animação acompanha a rolagem. */
   @supports (animation-timeline: view()) {
     .reveal {
       animation: reveal-in linear both;
       animation-timeline: view();
       animation-range: cover 0% cover 22%;
     }
+  }
+
+  /*
+    Nos outros navegadores (ex.: Firefox), o MotionObserver marca o <html> com .motion-io
+    e adiciona .is-visible quando o bloco aparece. Sem JavaScript, nada fica escondido.
+  */
+  .motion-io .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity var(--motion-slow) var(--ease-out-expo),
+      transform var(--motion-slow) var(--ease-out-expo);
+  }
+
+  .motion-io .reveal.is-visible {
+    opacity: 1;
+    transform: none;
   }
 }
 

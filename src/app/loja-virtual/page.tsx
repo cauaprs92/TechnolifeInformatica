@@ -107,6 +107,7 @@ export default function LojaVirtualPage() {
               <SignalArcs
                 className="pointer-events-none absolute -top-24 -right-24 -z-10 hidden size-40 text-signal lg:block"
                 strokeWidth={26}
+                animated
               />
               <article className="group overflow-hidden rounded-panel bg-white text-ink shadow-2xl shadow-black/40">
                 <div className="flex items-center justify-between gap-3 bg-signal px-5 py-3 text-white">

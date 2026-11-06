@@ -16,6 +16,7 @@ export default function CtaBand({ showShop = true }: { showShop?: boolean }) {
           <SignalArcs
             className="pointer-events-none absolute -right-16 -bottom-16 -z-10 size-80 -scale-x-100 text-signal/30"
             strokeWidth={30}
+            animated
           />
           <span className="eyebrow text-signal-light">
             <SignalMark className="size-3.5" />

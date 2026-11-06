@@ -73,6 +73,7 @@ export default function Hero() {
           <SignalArcs
             className="pointer-events-none absolute -top-30 -right-30 -z-10 hidden size-40 text-signal lg:block"
             strokeWidth={26}
+            animated
           />
           <div className="relative overflow-hidden rounded-panel shadow-2xl ring-1 shadow-black/40 ring-white/15">
             <Image

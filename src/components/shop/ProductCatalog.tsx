@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { type CSSProperties, useState } from "react";
 import { LayoutGrid, PackageSearch, type LucideIcon } from "lucide-react";
 import { whatsappLink } from "@/lib/nav";
 import { type CategoryId, products, shopCategories } from "@/lib/shop";
@@ -62,9 +62,10 @@ export default function ProductCatalog() {
       </p>
 
       {visible.length > 0 ? (
-        <ul className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {visible.map((product) => (
-            <li key={product.id}>
+        // A key muda com o filtro: a lista é recriada e os cards entram em sequência
+        <ul key={filter} className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {visible.map((product, index) => (
+            <li key={product.id} className="card-in" style={{ "--i": index } as CSSProperties}>
               <ProductCard product={product} />
             </li>
           ))}

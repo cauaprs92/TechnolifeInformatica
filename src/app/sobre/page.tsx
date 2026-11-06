@@ -4,6 +4,7 @@ import SectionHeading from "@/components/SectionHeading";
 import ClientMarquee from "@/components/ClientMarquee";
 import CtaBand from "@/components/CtaBand";
 import { Check } from "lucide-react";
+import CountUp from "@/components/CountUp";
 import { SignalArcs, SignalMark, WhatsAppIcon } from "@/components/icons";
 import { values } from "@/lib/data";
 import { whatsappLink } from "@/lib/nav";
@@ -15,11 +16,12 @@ export const metadata: Metadata = {
 
 const FOUNDED = 2002;
 
-const facts: { value: string; unit?: string; label: string }[] = [
+const facts: { value: string; count?: number; unit?: string; label: string }[] = [
   { value: String(FOUNDED), label: "Ano de fundação, em janeiro. Mais de duas décadas no mercado de TI." },
   // Calculado no build, para não ficar desatualizado
   {
     value: `+${new Date().getFullYear() - FOUNDED - 1}`,
+    count: new Date().getFullYear() - FOUNDED - 1, // conta de 0 até o valor ao aparecer
     unit: "anos",
     label: "de experiência em assistência técnica para empresas e residências.",
   },
@@ -80,7 +82,7 @@ export default function SobrePage() {
                 <div key={fact.label} className="flex flex-col-reverse py-6 first:pt-0 last:pb-0">
                   <dt className="mt-3 max-w-xs leading-snug text-white/85">{fact.label}</dt>
                   <dd className="font-display text-7xl leading-none font-extrabold [font-variation-settings:'wdth'_78] sm:text-8xl">
-                    {fact.value}
+                    {fact.count ? <CountUp to={fact.count} prefix="+" /> : fact.value}
                     {fact.unit && <span className="ml-2 text-3xl sm:text-4xl">{fact.unit}</span>}
                   </dd>
                 </div>

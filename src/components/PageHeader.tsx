@@ -20,6 +20,7 @@ export default function PageHeader({
       <SignalArcs
         className="pointer-events-none absolute -right-10 -bottom-10 -z-10 hidden size-72 -scale-x-100 text-signal/40 md:block"
         strokeWidth={30}
+        animated
       />
 
       <div className="shell py-16 sm:py-20 lg:py-24">

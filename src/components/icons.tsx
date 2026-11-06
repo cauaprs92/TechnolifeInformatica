@@ -1,4 +1,4 @@
-import type { SVGProps } from "react";
+import type { CSSProperties, SVGProps } from "react";
 
 type IconProps = SVGProps<SVGSVGElement>;
 
@@ -57,13 +57,27 @@ export function SignalMark(props: IconProps) {
   );
 }
 
-/** Os mesmos arcos em escala grande, como grafismo de fundo. */
-export function SignalArcs({ strokeWidth = 28, ...props }: IconProps & { strokeWidth?: number }) {
+const ARCS = ["M0 280a120 120 0 0 1 120 120", "M0 180a220 220 0 0 1 220 220", "M0 80a320 320 0 0 1 320 320"];
+
+/**
+ * Os mesmos arcos em escala grande, como grafismo de fundo.
+ * Com `animated`, os arcos acendem um depois do outro, como o sinal "transmitindo".
+ */
+export function SignalArcs({
+  strokeWidth = 28,
+  animated = false,
+  ...props
+}: IconProps & { strokeWidth?: number; animated?: boolean }) {
   return (
     <svg viewBox="0 0 400 400" fill="none" stroke="currentColor" strokeWidth={strokeWidth} aria-hidden="true" {...props}>
-      <path d="M0 280a120 120 0 0 1 120 120" />
-      <path d="M0 180a220 220 0 0 1 220 220" />
-      <path d="M0 80a320 320 0 0 1 320 320" />
+      {ARCS.map((d, i) => (
+        <path
+          key={d}
+          d={d}
+          className={animated ? "signal-wave" : undefined}
+          style={animated ? ({ "--i": i } as CSSProperties) : undefined}
+        />
+      ))}
     </svg>
   );
 }
